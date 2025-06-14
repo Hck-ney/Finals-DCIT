@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>a{% extends 'students/base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-danger text-white">
+        <h2>Delete Student</h2>
+    </div>
+    <div class="card-body">
+        <p>Are you sure you want to delete "{{ object }}"?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Confirm Delete</button>
+            <a href="{% url 'student-list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

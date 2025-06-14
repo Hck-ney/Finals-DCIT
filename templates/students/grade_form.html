@@ -1,0 +1,49 @@
+{% extends 'students/base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h2>{% if object %}Edit{% else %}Add New{% endif %} Grade</h2>
+            <p class="mb-0">For Subject: {{ subject.name }}</p>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+
+                <!-- Form fields remain the same -->
+                <div class="mb-3">
+                    <label for="id_activity" class="form-label">Activity Score (20%)</label>
+                    <input type="number" class="form-control" id="id_activity" name="activity"
+                           min="0" max="100" step="0.01"
+                           value="{{ form.activity.value|default_if_none:'' }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_quiz" class="form-label">Quiz Score (30%)</label>
+                    <input type="number" class="form-control" id="id_quiz" name="quiz"
+                           min="0" max="100" step="0.01"
+                           value="{{ form.quiz.value|default_if_none:'' }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_exam" class="form-label">Exam Score (50%)</label>
+                    <input type="number" class="form-control" id="id_exam" name="exam"
+                           min="0" max="100" step="0.01"
+                           value="{{ form.exam.value|default_if_none:'' }}" required>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save"></i> Save Grade
+                    </button>
+                    <a href="{% url 'student-detail' subject.student.id %}"
+                       class="btn btn-secondary">
+                        <i class="bi bi-x-circle"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

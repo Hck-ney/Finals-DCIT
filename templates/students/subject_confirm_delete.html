@@ -1,0 +1,27 @@
+{% extends 'students/base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="card">
+        <div class="card-header bg-danger text-white">
+            <h2>Confirm Subject Deletion</h2>
+        </div>
+        <div class="card-body">
+            <p>Are you sure you want to delete the subject "{{ object.name }}"?</p>
+            <p class="text-muted">This will also delete all associated grades.</p>
+            
+            <form method="post">
+                {% csrf_token %}
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash"></i> Confirm Delete
+                    </button>
+                    <a href="{% url 'student-detail' object.student.id %}" class="btn btn-secondary">
+                        <i class="bi bi-x-circle"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
